@@ -14,6 +14,7 @@ let tasks = [
     urgent: true,
     important: true,
     completed: false,
+    completedAt: null,
     createdAt: new Date(),
   },
   {
@@ -22,6 +23,7 @@ let tasks = [
     urgent: false,
     important: true,
     completed: false,
+    completedAt: null,
     createdAt: new Date(),
   },
 ];
@@ -41,6 +43,7 @@ app.post("/tasks", (req, res) => {
     urgent: urgent ?? false,
     important: important ?? false,
     completed: false,
+    completedAt: null,
     createdAt: new Date(),
   };
 
@@ -65,6 +68,19 @@ app.put("/tasks/:id", (req, res) => {
 
   if (req.body.completed !== undefined) {
     task.completed = req.body.completed;
+    if (req.body.completed) {
+      task.completedAt = req.body.completedAt
+        ? new Date(req.body.completedAt)
+        : new Date();
+    } else {
+      task.completedAt = null;
+    }
+  }
+
+  if (req.body.completedAt !== undefined) {
+    task.completedAt = req.body.completedAt
+      ? new Date(req.body.completedAt)
+      : null;
   }
 
   if (req.body.urgent !== undefined) {

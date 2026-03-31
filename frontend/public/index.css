@@ -47,24 +47,37 @@ h1 {
   border: 1px solid #ccc;
 }
 
-.input-group label {
+.input-group > div {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
 }
 
-.input-group button {
-  padding: 10px 15px;
-  border: none;
-  background: #667eea;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
+.input-group > div > div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#completed-section {
+  margin-top: 20px;
+  border-color: #607d8b;
+}
+
+#completed-section h3 {
+  margin-bottom: 10px;
 }
 
 .input-group button:hover {
   background: #5a67d8;
+}
+
+/* Classification label */
+.classification {
+  font-size: 0.85rem;
+  color: #666;
+  margin: -8px 0 10px 0;
+  font-weight: 500;
 }
 
 /* Matrix layout */
@@ -111,6 +124,15 @@ h1 {
   padding-left: 20px;
 }
 
+#addBtn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 /* Task item */
 .task-list li {
   background: white;
@@ -125,13 +147,16 @@ h1 {
 
 /* Task text */
 .completed {
-  text-decoration: line-through;
-  color: gray;
+  color: #666;
+  opacity: 0.65;
+  text-decoration: none;
+  text-shadow: none;
 }
 
 .pending {
   color: black;
 }
+
 
 /* Buttons */
 .task-list button {

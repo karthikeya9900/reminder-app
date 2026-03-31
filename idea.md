@@ -4,21 +4,21 @@
 
 The **Reminder App** is a task management system where users can:
 
-* Create and manage tasks
-* Classify tasks based on urgency and importance
-* Track deadlines
-* Separate pending and completed tasks
-* Maintain logs for all actions
+- Create and manage tasks
+- Classify tasks based on urgency and importance
+- Track deadlines
+- Separate pending and completed tasks
+- Maintain logs for all actions
 
 ---
 
 ## 🎯 Project Goals
 
-* Build a **full-stack application**
-* Understand **CRUD operations**
-* Learn **database design**
-* Gain hands-on experience with **Docker**
-* Understand **multi-container architecture**
+- Build a **full-stack application**
+- Understand **CRUD operations**
+- Learn **database design**
+- Gain hands-on experience with **Docker**
+- Understand **multi-container architecture**
 
 ---
 
@@ -26,10 +26,10 @@ The **Reminder App** is a task management system where users can:
 
 ### ✅ Task Management
 
-* Create task
-* View tasks
-* Update task
-* Delete task
+- Create task
+- View tasks
+- Update task
+- Delete task
 
 ---
 
@@ -37,31 +37,30 @@ The **Reminder App** is a task management system where users can:
 
 Each task contains:
 
-* `id`
-* `title`
-* `description`
-* `urgent` (boolean)
-* `important` (boolean)
-* `deadline` (optional)
-* `created_at`
-* `updated_at`
+- `id`
+- `title`
+- `description`
+- `urgent` (boolean)
+- `important` (boolean)
+- `deadline` (optional)
+- `created_at`
+- `updated_at`
 
 ---
 
 ### ✅ Task Status Handling
 
-* Only **pending tasks** are shown in main view
-* Completed tasks are stored separately
+- Only **pending tasks** are shown in main view
+- Completed tasks are stored separately
 
 ---
 
 ### ✅ Completed Tasks
 
-* Stored in a separate table
-* Include:
-
-  * all task fields
-  * `completed_at`
+- Stored in a separate table
+- Include:
+  - all task fields
+  - `completed_at`
 
 ---
 
@@ -69,10 +68,10 @@ Each task contains:
 
 Every action is logged:
 
-* Task creation
-* Task update
-* Task deletion
-* Task completion
+- Task creation
+- Task update
+- Task deletion
+- Task completion
 
 ---
 
@@ -80,37 +79,37 @@ Every action is logged:
 
 ### 🔹 `tasks` (Active Tasks)
 
-* id
-* title
-* description
-* urgent
-* important
-* deadline
-* created_at
-* updated_at
+- id
+- title
+- description
+- urgent
+- important
+- deadline
+- created_at
+- updated_at
 
 ---
 
 ### 🔹 `completed_tasks`
 
-* id
-* title
-* description
-* urgent
-* important
-* deadline
-* created_at
-* updated_at
-* completed_at
+- id
+- title
+- description
+- urgent
+- important
+- deadline
+- created_at
+- updated_at
+- completed_at
 
 ---
 
 ### 🔹 `activity_logs`
 
-* id
-* action (CREATE / UPDATE / DELETE / COMPLETE)
-* task_id
-* timestamp
+- id
+- action (CREATE / UPDATE / DELETE / COMPLETE)
+- task_id
+- timestamp
 
 ---
 
@@ -118,25 +117,25 @@ Every action is logged:
 
 ### ✔ Creating Task
 
-* Insert into `tasks`
-* Add entry in `activity_logs`
+- Insert into `tasks`
+- Add entry in `activity_logs`
 
 ### ✔ Updating Task
 
-* Update `tasks`
-* Update `updated_at`
-* Add log entry
+- Update `tasks`
+- Update `updated_at`
+- Add log entry
 
 ### ✔ Completing Task
 
-* Move data from `tasks` → `completed_tasks`
-* Add `completed_at`
-* Insert log entry
+- Move data from `tasks` → `completed_tasks`
+- Add `completed_at`
+- Insert log entry
 
 ### ✔ Deleting Task
 
-* Remove from `tasks`
-* Add log entry
+- Remove from `tasks`
+- Add log entry
 
 ---
 
@@ -183,16 +182,16 @@ reminder-app/
 
 ### Step 1: Backend (Basic API)
 
-* Create simple API with dummy data
+- Create simple API with dummy data
 
 ### Step 2: Frontend
 
-* Fetch and display data from backend
+- Fetch and display data from backend
 
 ### Step 3: Backend Expansion
 
-* Add database
-* Replace dummy data with real data
+- Add database
+- Replace dummy data with real data
 
 ---
 
@@ -200,18 +199,18 @@ reminder-app/
 
 ### Containers:
 
-* Backend (Node.js)
-* Frontend (Static files)
-* Database (PostgreSQL)
+- Backend (Node.js)
+- Frontend (Static files)
+- Database (PostgreSQL)
 
 ---
 
 ### Key Concepts:
 
-* Container networking
-* Environment variables
-* Volume management
-* Multi-container setup using Docker Compose
+- Container networking
+- Environment variables
+- Volume management
+- Multi-container setup using Docker Compose
 
 ---
 
@@ -219,79 +218,80 @@ reminder-app/
 
 ### Tasks
 
-* `GET /tasks`
-* `POST /tasks`
-* `PUT /tasks/:id`
-* `DELETE /tasks/:id`
+- `GET /tasks`
+- `POST /tasks`
+- `PUT /tasks/:id`
+- `DELETE /tasks/:id`
 
 ---
 
 ### Completion
 
-* `POST /tasks/:id/complete`
+- `POST /tasks/:id/complete`
 
 ---
 
 ### Completed Tasks
 
-* `GET /completed-tasks`
+- `GET /completed-tasks`
 
 ---
 
 ### Logs
 
-* `GET /logs`
+- `GET /logs`
 
 ---
 
 ### System Info (Docker Learning)
 
-* `GET /system-info`
+- `GET /system-info`
 
 ---
 
 ## 🧠 Key Learnings from This Project
 
-* Backend architecture design
-* Database normalization
-* API development
-* Frontend-backend integration
-* Docker containerization
-* Debugging real-world issues
+- Backend architecture design
+- Database normalization
+- API development
+- Frontend-backend integration
+- Docker containerization
+- Debugging real-world issues
 
 ---
 
 ## 🚀 Current Progress
 
-* Project idea finalized ✅
-* Folder structure created ✅
-* Backend initialization started ✅
-* First API (dummy data) planned ✅
-* Frontend integration planned ✅
+- Project idea finalized ✅
+- Folder structure created ✅
+- Backend initialization started ✅
+- First API (dummy data) planned ✅
+- Frontend integration planned ✅
 
 ---
 
 ## 📌 Next Steps
 
-* Fix backend execution issue
-* Run basic server
-* Create `/tasks` API
-* Build frontend to display tasks
-* Connect backend to database# 📝 Reminder App Project Notes
+- Fix backend execution issue
+- Run basic server
+- Create `/tasks` API
+- Build frontend to display tasks
+- Connect backend to database# 📝 Reminder App Project Notes
 
 ## 📌 Project Overview
 
 The **Reminder App** is a task management system where users can:
 
-* Create and manage tasks
-* Classify tasks based on urgency and importance
-* Track deadlines
-* Separate pending and completed tasks
-* Maintain logs for all actions
+- Create and manage tasks
+- Classify tasks based on urgency and importance
+- Track deadlines
+- Separate pending and completed tasks
+- Maintain logs for all actions
 
 ---
 
 # BREAK
+
 ---
 
 # 🗂️ Reminder App – ER Diagram
@@ -300,37 +300,37 @@ The **Reminder App** is a task management system where users can:
 
 ### 1. Task (Active Tasks)
 
-* id (PK)
-* title
-* description
-* urgent (boolean)
-* important (boolean)
-* deadline (timestamp)
-* created_at (timestamp)
-* updated_at (timestamp)
+- id (PK)
+- title
+- description
+- urgent (boolean)
+- important (boolean)
+- deadline (timestamp)
+- created_at (timestamp)
+- updated_at (timestamp)
 
 ---
 
 ### 2. Completed_Task
 
-* id (PK)
-* title
-* description
-* urgent (boolean)
-* important (boolean)
-* deadline (timestamp)
-* created_at (timestamp)
-* updated_at (timestamp)
-* completed_at (timestamp)
+- id (PK)
+- title
+- description
+- urgent (boolean)
+- important (boolean)
+- deadline (timestamp)
+- created_at (timestamp)
+- updated_at (timestamp)
+- completed_at (timestamp)
 
 ---
 
 ### 3. Activity_Log
 
-* id (PK)
-* action (CREATE / UPDATE / DELETE / COMPLETE)
-* task_id (FK)
-* timestamp
+- id (PK)
+- action (CREATE / UPDATE / DELETE / COMPLETE)
+- task_id (FK)
+- timestamp
 
 ---
 
@@ -338,15 +338,15 @@ The **Reminder App** is a task management system where users can:
 
 ### Task → Activity_Log
 
-* One Task can have many logs
-* Relationship: **1 : N**
+- One Task can have many logs
+- Relationship: **1 : N**
 
 ---
 
 ### Completed_Task → Activity_Log
 
-* One Completed Task can have many logs
-* Relationship: **1 : N**
+- One Completed Task can have many logs
+- Relationship: **1 : N**
 
 ---
 
@@ -407,31 +407,39 @@ The **Reminder App** is a task management system where users can:
 
 ### 🔹 1. Task vs Completed_Task
 
-* Separated for clarity and performance
-* Keeps active tasks table clean
+- Separated for clarity and performance
+- Keeps active tasks table clean
 
 ---
 
 ### 🔹 2. Activity Logs
 
-* Tracks all actions
-* Helps in debugging and auditing
+- Tracks all actions
+- Helps in debugging and auditing
 
 ---
 
 ### 🔹 3. task_id in logs
 
-* Refers to task (or completed task)
-* Can be improved later with:
-
-  * `entity_type` (advanced)
+- Refers to task (or completed task)
+- Can be improved later with:
+  - `entity_type` (advanced)
 
 ---
 
 ## 🚀 Future Improvements (Optional)
 
-* Add `user` table (multi-user system)
-* Add `priority_score`
-* Add `status` instead of separate tables (alternative design)
+- Add `user` table (multi-user system)
+- Add `priority_score`
+- Add `status` instead of separate tables (alternative design)
 
 ---
+
+# things to update today
+
+1. align task priority buttons
+2. add a button to update the task details and it should be able to change the priorities also
+3. add a special section for tasks which are completed and need to remove the toggle button  
+   the completed tasks should display below the current pending tasks
+4. need to add a pop up to confirm the task adding details like if user forgot to select priority
+5. and need add pop up for marking a task as completed and it should store timestamp also

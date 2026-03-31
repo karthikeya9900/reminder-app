@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Reminder App</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>📝 Reminder App</h1>
+
+      <!-- Input Section -->
+      <div class="input-group">
+        <input
+          type="text"
+          id="taskInput"
+          placeholder="Enter a task..."
+          required
+        />
+        <div>
+          <div>
+            <input type="checkbox" id="urgent" />
+            <label for="urgent">Urgent</label>
+          </div>
+          <div>
+            <input type="checkbox" id="important" />
+            <label for="important">Important</label>
+          </div>
+
+          <button id="addBtn">Add</button>
+        </div>
+      </div>
+
+      <!-- Matrix Layout -->
+      <div class="matrix">
+        <!-- Urgent + Important -->
+        <div class="box" id="urgent-important">
+          <h3>🔥 Do Now</h3>
+          <div class="task-list"></div>
+        </div>
+
+        <!-- Important + Not Urgent -->
+        <div class="box" id="important-not-urgent">
+          <h3>📅 Plan</h3>
+          <div class="task-list"></div>
+        </div>
+
+        <!-- Urgent + Not Important -->
+        <div class="box" id="urgent-not-important">
+          <h3>🤝 Delegate</h3>
+          <div class="task-list"></div>
+        </div>
+
+        <!-- Not Urgent + Not Important -->
+        <div class="box" id="not-urgent-not-important">
+          <h3>❌ Eliminate</h3>
+          <div class="task-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -13,12 +13,10 @@ async function fetchTasks() {
     const res = await fetch(API_URL);
     const data = await res.json();
 
-    const uiBox = document.querySelector("#urgent-important .task-list");
-    const iuBox = document.querySelector("#important-not-urgent .task-list");
-    const uiNotBox = document.querySelector("#urgent-not-important .task-list");
-    const noneBox = document.querySelector(
-      "#not-urgent-not-important .task-list",
-    );
+    const uiBox = document.getElementById("urgent-important");
+    const iuBox = document.getElementById("important-not-urgent");
+    const uiNotBox = document.getElementById("urgent-not-important");
+    const noneBox = document.getElementById("not-urgent-not-important");
     const completedList = document.getElementById("completed-task-list");
 
     // Clear all boxes
@@ -64,30 +62,44 @@ function createTaskElement(task) {
   const meta = document.createElement("small");
   meta.style.display = "block";
   meta.style.fontSize = "0.78rem";
-  meta.style.color = "#666";
+  meta.style.color = "#999";
+  meta.style.marginTop = "4px";
   meta.textContent = `Urgent: ${task.urgent ? "Yes" : "No"}, Important: ${task.important ? "Yes" : "No"}`;
+
+  if (task.completed && task.completedAt) {
+    const completedTime = new Date(task.completedAt).toLocaleString();
+    meta.textContent += ` | Completed At: ${completedTime}`;
+  } else if (task.completed) {
+    meta.textContent += ` | (timestamp unavailable)`;
+  }
 
   leftDiv.appendChild(span);
   leftDiv.appendChild(meta);
 
   const rightDiv = document.createElement("div");
+  rightDiv.style.display = "flex";
+  rightDiv.style.gap = "6px";
+  rightDiv.style.flexWrap = "wrap";
 
   // Buttons only for pending tasks
   if (!task.completed) {
     const toggleBtn = document.createElement("button");
     toggleBtn.textContent = "Complete";
+    toggleBtn.className = "btn btn-success btn-sm";
     toggleBtn.addEventListener("click", () => {
       toggleTask(task.id, task.completed);
     });
 
     const editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
+    editBtn.className = "btn btn-info btn-sm";
     editBtn.addEventListener("click", () => {
       enableEditMode(task, li, leftDiv, rightDiv);
     });
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
+    deleteBtn.className = "btn btn-danger btn-sm";
     deleteBtn.addEventListener("click", () => {
       deleteTask(task.id);
     });
@@ -107,30 +119,47 @@ function createTaskElement(task) {
 function enableEditMode(task, li, leftDiv, rightDiv) {
   leftDiv.innerHTML = "";
   rightDiv.innerHTML = "";
-  const lineSpace = document.createElement("hr");
-  const lineBreak = document.createElement("br");
 
   const titleInput = document.createElement("input");
+  titleInput.className = "form-control form-control-sm mb-2";
   titleInput.value = task.title;
+  titleInput.placeholder = "Task title";
 
+  const urgentLabel = document.createElement("label");
+  urgentLabel.className = "form-check-label me-3";
   const urgentCheckbox = document.createElement("input");
   urgentCheckbox.type = "checkbox";
+  urgentCheckbox.className = "form-check-input";
   urgentCheckbox.checked = task.urgent;
-  const urgentLabel = document.createElement("label");
-  urgentLabel.textContent = "Urgent";
-  urgentLabel.style.marginRight = "10px";
+  urgentLabel.appendChild(urgentCheckbox);
+  urgentLabel.appendChild(document.createTextNode(" Urgent"));
 
+  const importantLabel = document.createElement("label");
+  importantLabel.className = "form-check-label me-3";
   const importantCheckbox = document.createElement("input");
   importantCheckbox.type = "checkbox";
+  importantCheckbox.className = "form-check-input";
   importantCheckbox.checked = task.important;
-  const importantLabel = document.createElement("label");
-  importantLabel.textContent = "Important";
+  importantLabel.appendChild(importantCheckbox);
+  importantLabel.appendChild(document.createTextNode(" Important"));
+
+  const checkboxDiv = document.createElement("div");
+  checkboxDiv.className = "mb-2";
+  checkboxDiv.appendChild(urgentLabel);
+  checkboxDiv.appendChild(importantLabel);
 
   const saveBtn = document.createElement("button");
   saveBtn.textContent = "Save";
+  saveBtn.className = "btn btn-success btn-sm";
 
   const cancelBtn = document.createElement("button");
   cancelBtn.textContent = "Cancel";
+  cancelBtn.className = "btn btn-secondary btn-sm ms-2";
+
+  const buttonDiv = document.createElement("div");
+  buttonDiv.className = "mt-2";
+  buttonDiv.appendChild(saveBtn);
+  buttonDiv.appendChild(cancelBtn);
 
   titleInput.focus();
 
@@ -140,15 +169,8 @@ function enableEditMode(task, li, leftDiv, rightDiv) {
   });
 
   leftDiv.appendChild(titleInput);
-  leftDiv.appendChild(lineBreak);
-  leftDiv.appendChild(urgentCheckbox);
-  leftDiv.appendChild(urgentLabel);
-  leftDiv.appendChild(lineBreak);
-  leftDiv.appendChild(importantCheckbox);
-  leftDiv.appendChild(importantLabel);
-  leftDiv.appendChild(lineSpace);
-  leftDiv.appendChild(saveBtn);
-  leftDiv.appendChild(cancelBtn);
+  leftDiv.appendChild(checkboxDiv);
+  leftDiv.appendChild(buttonDiv);
 
   // Save
   saveBtn.addEventListener("click", async () => {

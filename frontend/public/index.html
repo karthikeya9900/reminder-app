@@ -1,72 +1,94 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reminder App</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./index.css" />
   </head>
-  <body>
-    <div class="container">
-      <h1>📝 Reminder App</h1>
+  <body class="bg-gradient">
+    <div class="container-lg py-5">
+      <h1 class="text-center text-black mb-4">📝 Reminder App</h1>
 
       <!-- Input Section -->
-      <div class="input-group">
-        <input
-          type="text"
-          id="taskInput"
-          placeholder="Enter a task..."
-          required
-        />
-        <div>
-          <div>
-            <input type="checkbox" id="urgent" />
-            <label for="urgent">Urgent</label>
-          </div>
-          <div>
-            <input type="checkbox" id="important" />
-            <label for="important">Important</label>
-          </div>
-
-          <button id="addBtn">Add</button>
+      <div class="row mb-4 justify-content-center">
+        <div class="col-lg-8">
+          <div class="input-group-wrapper p-3 bg-white rounded-3 shadow-sm">
+            <input type="text" id="taskInput" class="form-control form-control-lg mb-3" placeholder="Enter a task..."
+              required />
+            <div class="row g-2">
+              <div class="col-md-6">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="urgent" />
+                  <label class="form-check-label" for="urgent">Urgent</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="important" />
+                  <label class="form-check-label" for="important">Important</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <button id="addBtn" class="btn btn-primary w-100">Add Task</button>
+              </div>
+              </div>
+              </div>
         </div>
       </div>
 
       <!-- Matrix Layout -->
-      <div class="matrix">
+      <div class="row g-3 mb-4">
         <!-- Urgent + Important -->
-        <div class="box" id="urgent-important">
-          <h3>🔥 Do Now</h3>
-          <p class="classification">Urgent & Important</p>
-          <div class="task-list"></div>
+        <div class="col-lg-6">
+          <div class="box box-urgent-important">
+            <h3>🔥 Do Now</h3>
+            <p class="classification">Urgent & Important</p>
+            <ul class="task-list" id="urgent-important"></ul>
+            </div>
         </div>
 
         <!-- Important + Not Urgent -->
-        <div class="box" id="important-not-urgent">
-          <h3>📅 Plan</h3>
-          <p class="classification">Important (Not Urgent)</p>
-          <div class="task-list"></div>
+        <div class="col-lg-6">
+          <div class="box box-important-not-urgent">
+            <h3>📅 Plan</h3>
+            <p class="classification">Important (Not Urgent)</p>
+            <ul class="task-list" id="important-not-urgent"></ul>
+            </div>
         </div>
 
         <!-- Urgent + Not Important -->
-        <div class="box" id="urgent-not-important">
-          <h3>🤝 Delegate</h3>
-          <p class="classification">Urgent (Not Important)</p>
-          <div class="task-list"></div>
+        <div class="col-lg-6">
+          <div class="box box-urgent-not-important">
+            <h3>🤝 Delegate</h3>
+            <p class="classification">Urgent (Not Important)</p>
+            <ul class="task-list" id="urgent-not-important"></ul>
+            </div>
         </div>
 
         <!-- Not Urgent + Not Important -->
-        <div class="box" id="not-urgent-not-important">
-          <h3>❌ Eliminate</h3>
-          <p class="classification">Low Priority</p>
-          <div class="task-list"></div>
-        </div>
+        <div class="col-lg-6">
+          <div class="box box-not-urgent-not-important">
+            <h3>❌ Eliminate</h3>
+            <p class="classification">Low Priority</p>
+            <ul class="task-list" id="not-urgent-not-important"></ul>
+            </div>
+            </div>
       </div>
-<!-- Completed tasks section -->
-<div class="box" id="completed-section">
-  <h3>✅ Completed Tasks</h3>
-  <ul class="task-list" id="completed-task-list"></ul>
-</div>
+
+      <!-- Completed tasks section -->
+      <div class="row">
+        <div class="col-12">
+          <div class="box box-completed">
+            <h3>✅ Completed Tasks</h3>
+            <ul class="task-list" id="completed-task-list"></ul>
+          </div>
+        </div>
+        </div>
     </div>
 
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

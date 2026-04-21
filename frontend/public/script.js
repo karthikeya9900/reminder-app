@@ -7,6 +7,15 @@ window.onload = () => {
   document.getElementById("addBtn").addEventListener("click", addTask);
 };
 
+function addEmptyState(box) {
+  if (!box.hasChildNodes()) {
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.textContent = "No tasks";
+    box.appendChild(empty);
+  }
+}
+
 // 🔹 Fetch tasks and render into 4 boxes
 async function fetchTasks() {
   try {
@@ -44,6 +53,11 @@ async function fetchTasks() {
         noneBox.appendChild(taskElement);
       }
     });
+    addEmptyState(uiBox);
+    addEmptyState(iuBox);
+    addEmptyState(uiNotBox);
+    addEmptyState(noneBox);
+    addEmptyState(completedList);
   } catch (err) {
     console.error("Error fetching tasks:", err);
   }
@@ -77,9 +91,7 @@ function createTaskElement(task) {
   leftDiv.appendChild(meta);
 
   const rightDiv = document.createElement("div");
-  rightDiv.style.display = "flex";
-  rightDiv.style.gap = "6px";
-  rightDiv.style.flexWrap = "wrap";
+  rightDiv.className = "task-actions";
 
   // Buttons only for pending tasks
   if (!task.completed) {

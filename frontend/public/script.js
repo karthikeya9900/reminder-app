@@ -1,8 +1,24 @@
 const API_URL = "http://localhost:5000/tasks";
 
+let searchQuery = "";
+
 window.onload = () => {
   fetchTasks();
   initDatePicker();
+
+  const searchInput = document.getElementById("searchInput");
+  const clearBtn = document.getElementById("clearSearch");
+
+  searchInput.addEventListener("input", (e) => {
+    searchQuery = e.target.value.toLowerCase();
+    fetchTasks(); // re-render with highlight
+  });
+
+  clearBtn.addEventListener("click", () => {
+    searchQuery = "";
+    searchInput.value = "";
+    fetchTasks();
+  });
   // Add button event
   document.getElementById("addBtn").addEventListener("click", addTask);
 };
@@ -100,6 +116,16 @@ function getDeadlineText(deadline) {
 function createTaskElement(task) {
   const li = document.createElement("li");
 
+  // ✅ Highlight matching task
+  if (searchQuery) {
+    const match =
+      task.title.toLowerCase().includes(searchQuery) ||
+      (task.deadline && task.deadline.includes(searchQuery));
+
+    if (match) {
+      li.classList.add("highlight-task");
+    }
+  }
   const leftDiv = document.createElement("div");
 
   const span = document.createElement("span");

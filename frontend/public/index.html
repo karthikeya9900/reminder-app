@@ -16,27 +16,27 @@
   <div class="container-lg py-5">
     <h1 class="text-center text-black mb-4">📝 Reminder</h1>
 
-    <!-- Input Section -->
-    <div class="row mb-4 justify-content-center">
-      <div class="col-lg-8">
+    <!-- Input + Search Row -->
+    <div class="row mb-4">
+      <!-- LEFT: Task Input -->
+      <div class="col-lg-9">
         <div class="input-group-wrapper p-3 bg-white rounded-3 shadow-sm">
-          <!-- Task Input -->
           <input type="text" id="taskInput" class="form-control form-control-lg mb-2" placeholder="Enter a task..."
             required />
-          <!-- 🔥 NEW: Deadline -->
+
           <div class="mb-3">
             <input type="text" id="deadline" class="form-control form-control-sm" placeholder="📅 Select a deadline (optional)" />
           </div>
-          <!-- Controls -->
+
           <div class="row g-2 align-items-center">
             <div class="col-md-6 d-flex gap-3 flex-wrap">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="urgent" />
-                <label class="form-check-label" for="urgent">Urgent</label>
+                <label class="form-check-label">Urgent</label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="important" />
-                <label class="form-check-label" for="important">Important</label>
+                <label class="form-check-label">Important</label>
               </div>
             </div>
 
@@ -44,7 +44,16 @@
               <button id="addBtn" class="btn btn-primary w-100">Add Task</button>
             </div>
           </div>
+        </div>
+        </div>
 
+      <!-- RIGHT: Search Box -->
+      <div class="col-lg-3">
+        <div class="search-box p-3 bg-white rounded-3 shadow-sm">
+          <input type="text" id="searchInput" class="form-control mb-2" placeholder="🔍 Search task or date" />
+          <button id="clearSearch" class="btn btn-outline-secondary w-100">
+            Clear
+          </button>
         </div>
       </div>
     </div>

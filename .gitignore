@@ -7,10 +7,13 @@
 .DS_Store
 .env
 ./docker-compose.yml
-./Dockerfile
-./idea.md
+./Docke
 ./database
 ./docker
 ./frontend/node_modules
 ./frontend/dist
+/day_plan.md
+/node_modules
+./backend/node_modules
+./backend/dist
 /day_plan.md

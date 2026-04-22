@@ -1,33 +1,37 @@
 version: "3.9"
 
 services:
+  backend:
+    build: ./backend
+    container_name: reminder-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=reminderdb
+      - DB_PORT=5432
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: reminder-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
   db:
     image: postgres:15
     container_name: reminder-db
     restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres123
-      POSTGRES_DB: reminder_app
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: reminderdb
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
-
-  backend:
-    build: ./backend
-    container_name: reminder-backend
-    restart: always
-    ports:
-      - "1000:1000"
-    environment:
-      DB_HOST: db
-      DB_USER: postgres
-      DB_PASSWORD: postgres123
-      DB_NAME: reminder_app
-      DB_PORT: 5432
-    depends_on:
-      - db
-
-volumes:
-  pgdata:
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql

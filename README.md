@@ -1,34 +1,38 @@
 # 📝 Reminder App
 
-## 📌 Project Overview
+![Status](https://img.shields.io/badge/status-in%20development-yellow)
+![Backend](https://img.shields.io/badge/backend-Node.js-green)
+![Frontend](https://img.shields.io/badge/frontend-HTML%2FCSS%2FJS-blue)
+![Database](https://img.shields.io/badge/database-in%20memory-lightgrey)
+![License](https://img.shields.io/badge/license-MIT-brightgreen)
 
-The **Reminder App** is a task management system based on the **Urgent–Important Matrix (Eisenhower Matrix)**.
-
-Users can:
-
-- Create and manage tasks
-- Classify tasks into 4 priority categories
-- Track deadlines (optional)
-- See remaining days dynamically
-- Mark tasks as completed
-- View completed tasks separately
+A task management system built on the **Eisenhower (Urgent–Important) Matrix**, designed to help users prioritize tasks effectively and manage deadlines efficiently.
 
 ---
 
-## 🎯 Core Features
+## 📌 Overview
+
+The Reminder App helps users:
+
+- Organize tasks using priority-based classification
+- Track deadlines with real-time status indicators
+- Visualize productivity using a 4-quadrant matrix
+- Manage task lifecycle (create → update → complete → delete)
+
+---
+
+## 🎯 Features
 
 ### ✅ Task Management
 
-- Create task
-- View tasks
-- Update task
-- Delete task
+- Create tasks
+- Update tasks
+- Delete tasks
+- View all tasks
 
 ---
 
-### ✅ Task Classification (Matrix)
-
-Tasks are automatically grouped into:
+### 📊 Eisenhower Matrix
 
 | Category     | Condition                  |
 | ------------ | -------------------------- |
@@ -39,166 +43,156 @@ Tasks are automatically grouped into:
 
 ---
 
-### ✅ Task Properties
+### ⏳ Deadline Tracking
 
-Each task contains:
+- Optional deadlines per task
+- Automatic calculation:
+  - Days remaining
+  - Due today
+  - Overdue detection
 
-- `id`
-- `title`
-- `urgent` (boolean)
-- `important` (boolean)
-- `deadline` (optional date)
-- `createdAt`
-- `completed` (boolean)
-- `completedAt`
+**Status Colors:**
 
----
-
-### ✅ Deadline Tracking (NEW ✨)
-
-- User can optionally set a deadline
-- App calculates:
-  - 📅 Days left
-  - ⏳ Due today
-  - ⚠️ Overdue
-- Visual indicators:
-  - Red → Overdue
-  - Orange → Due today
-  - Yellow → Near deadline
+- 🔴 Overdue
+- 🟠 Due today
+- 🟡 Near deadline
 
 ---
 
-### ✅ Completed Tasks
+### ✔ Completed Tasks
 
-- Stored in same structure (for now)
-- Moved to separate section in UI
-- Includes completion timestamp
-
----
-
-## 🧠 UI/UX Design
-
-### 🔹 Layout
-
-- 4 **equal-sized boxes (matrix layout)**
-- Fixed height → minimal scrolling
-- Scroll only inside each box
-
-### 🔹 Design Principles
-
-- Minimal spacing
-- Compact task cards
-- Clean typography
-- Soft shadows + subtle colors
+- Mark tasks as completed
+- Separate completed section
+- Stores completion timestamp
 
 ---
 
-## 🧱 Current Tech Stack
+## 🧠 Tech Stack
 
-### 🔹 Frontend
-
-- HTML
-- CSS (custom + Bootstrap)
-- Vanilla JavaScript
-
-### 🔹 Backend
-
-- Node.js
-- Express.js
-
-### 🔹 Storage
-
-- In-memory (temporary)
+| Layer    | Technology             |
+| -------- | ---------------------- |
+| Frontend | HTML, CSS, JavaScript  |
+| Styling  | Bootstrap + Custom CSS |
+| Backend  | Node.js, Express.js    |
+| Database | In-memory (temporary)  |
 
 ---
 
 ## 📡 API Endpoints
 
-### Tasks
-
-- `GET /tasks` → Fetch all tasks
-- `POST /tasks` → Create task
-- `PUT /tasks/:id` → Update task
-- `DELETE /tasks/:id` → Delete task
-
----
-
-## 🔄 Workflow Logic
-
-### ✔ Create Task
-
-- Stored in memory
-- Appears in matrix instantly
-
-### ✔ Update Task
-
-- Updates title / priority / deadline
-
-### ✔ Complete Task
-
-- Marked as completed
-- Moves to completed section
-
-### ✔ Delete Task
-
-- Removed from system
+| Method | Endpoint   | Description   |
+| ------ | ---------- | ------------- |
+| GET    | /tasks     | Get all tasks |
+| POST   | /tasks     | Create task   |
+| PUT    | /tasks/:id | Update task   |
+| DELETE | /tasks/:id | Delete task   |
 
 ---
 
-## 🧪 Current Limitations
+## 🔄 Workflow
 
-- ❌ No database (data lost on restart)
+- ➕ Create task → added to matrix
+- ✏️ Update task → modifies details
+- ✔ Complete task → moves to completed section
+- ❌ Delete task → removed permanently
+
+---
+
+## 🖼️ Screenshots
+
+> Add screenshots in `/screenshots` folder
+
+### 🏠 Dashboard (Matrix View)
+
+![Dashboard](screenshots/dashboard.png)
+
+### ➕ Create Task Modal
+
+![Create Task](screenshots/create-task.png)
+
+### 📅 Deadline Tracking View
+
+![Deadline View](screenshots/deadline.png)
+
+### ✔ Completed Tasks Section
+
+![Completed Tasks](screenshots/completed.png)
+
+---
+
+## 🚧 Current Limitations
+
+- ❌ No database persistence
 - ❌ No authentication
-- ❌ No persistent logs
 - ❌ No multi-user support
+- ❌ Data resets on server restart
 
 ---
 
-## 🚀 Next Steps
+## 🚀 Roadmap
 
-### 🔥 High Priority
+### 🔥 Phase 1
 
-- Add **database (PostgreSQL)**
-- Persist tasks
-- Add proper schema
+- PostgreSQL integration
+- Persistent storage
+- Schema design
 
-### ⚡ Medium Priority
+### ⚡ Phase 2
 
+- Task sorting & filtering
 - Activity logs
-- Edit deadline support
-- Sorting (by urgency / deadline)
+- Deadline editing
 
-### 🧠 Advanced
+### 🧠 Phase 3
 
-- Dockerize app
-- Multi-container setup
-- Add user system
+- User authentication
+- Multi-user system
+- Role-based access
 
 ---
 
-## 🐳 Future Docker Plan
+## 🐳 Docker Plan
 
-Containers:
+Planned architecture:
 
-- Backend (Node.js)
-- Frontend (Static)
+- Frontend (Nginx / Static)
+- Backend (Node.js API)
 - Database (PostgreSQL)
 
-Concepts to learn:
+### Concepts
 
 - Docker Compose
-- Networking
-- Volumes
+- Container networking
+- Volumes for persistence
 
 ---
 
-## 📂 Project Structure (Planned)
+## 📂 Project Structure
+
 ```
 reminder-app/
 │
-├── backend/
-├── frontend/
-├── database/
+├── backend/ # Express backend
+├── frontend/ # UI layer
+├── database/ # DB schema (future)
+├── screenshots/ # UI images
 ├── docker-compose.yml
 └── README.md
 ```
+
+---
+
+## 💡 Vision
+
+This project aims to evolve into a **scalable productivity system** with:
+
+- Persistent data storage
+- Clean modular architecture
+- Multi-user collaboration
+- Containerized deployment
+
+---
+
+## ⭐ If you like this project
+
+Give it a ⭐ on GitHub and feel free to contribute!

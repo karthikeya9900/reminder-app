@@ -63,6 +63,27 @@ async function fetchTasks() {
   }
 }
 
+function getDeadlineText(deadline) {
+  if (!deadline) return "";
+
+  const today = new Date();
+  const due = new Date(deadline);
+
+  // Remove time part for accurate day diff
+  today.setHours(0, 0, 0, 0);
+  due.setHours(0, 0, 0, 0);
+
+  const diffTime = due - today;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) return "⏳ Due today";
+  if (diffDays === 1) return "📅 1 day left";
+  if (diffDays > 1) return `📅 ${diffDays} days left`;
+  if (diffDays === -1) return "⚠️ Overdue by 1 day";
+
+  return `⚠️ Overdue by ${Math.abs(diffDays)} days`;
+}
+
 // 🔹 Create task UI
 function createTaskElement(task) {
   const li = document.createElement("li");
@@ -78,8 +99,13 @@ function createTaskElement(task) {
   meta.style.fontSize = "0.78rem";
   meta.style.color = "#999";
   meta.style.marginTop = "4px";
+  let deadlineText = getDeadlineText(task.deadline);
+
   meta.textContent = `Urgent: ${task.urgent ? "Yes" : "No"}, Important: ${task.important ? "Yes" : "No"}`;
 
+  if (deadlineText) {
+    meta.textContent += ` | ${deadlineText}`;
+  }
   if (task.completed && task.completedAt) {
     const completedTime = new Date(task.completedAt).toLocaleString();
     meta.textContent += ` | Completed At: ${completedTime}`;
@@ -119,6 +145,24 @@ function createTaskElement(task) {
     rightDiv.appendChild(toggleBtn);
     rightDiv.appendChild(editBtn);
     rightDiv.appendChild(deleteBtn);
+  }
+
+  if (task.deadline) {
+    const today = new Date();
+    const due = new Date(task.deadline);
+
+    today.setHours(0, 0, 0, 0);
+    due.setHours(0, 0, 0, 0);
+
+    const diffDays = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
+
+    if (diffDays < 0) {
+      li.style.borderLeft = "4px solid #ef4444"; // red
+    } else if (diffDays === 0) {
+      li.style.borderLeft = "4px solid #f59e0b"; // orange
+    } else if (diffDays <= 2) {
+      li.style.borderLeft = "4px solid #eab308"; // yellow
+    }
   }
 
   li.appendChild(leftDiv);
@@ -213,6 +257,7 @@ async function addTask() {
   const input = document.getElementById("taskInput");
   const urgent = document.getElementById("urgent").checked;
   const important = document.getElementById("important").checked;
+  const deadline = document.getElementById("deadline").value;
 
   const title = input.value.trim();
   if (!title) return;
@@ -234,6 +279,7 @@ async function addTask() {
         title,
         urgent,
         important,
+        deadline,
       }),
     });
 

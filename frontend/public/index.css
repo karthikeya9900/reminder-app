@@ -208,3 +208,21 @@ h1 {
 .box-not-urgent-not-important {
   border-left-color: var(--low);
 }
+.deadline-text {
+  font-size: 0.65rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+/* States */
+.deadline-text.overdue {
+  color: #ef4444;
+}
+
+.deadline-text.today {
+  color: #f59e0b;
+}
+
+.deadline-text.soon {
+  color: #eab308;
+}

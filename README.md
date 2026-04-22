@@ -123,6 +123,8 @@ docker-compose up --build
 ---
 
 📂 Project Structure
+
+```
 reminder-app/
 │
 ├── backend/ # Express API
@@ -130,3 +132,4 @@ reminder-app/
 ├── screenshots/ # UI images
 ├── docker-compose.yml
 └── README.md
+```

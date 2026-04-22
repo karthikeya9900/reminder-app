@@ -2,7 +2,7 @@ const API_URL = "http://localhost:5000/tasks";
 
 window.onload = () => {
   fetchTasks();
-
+  initDatePicker();
   // Add button event
   document.getElementById("addBtn").addEventListener("click", addTask);
 };
@@ -383,4 +383,13 @@ async function deleteTask(id) {
   } catch (err) {
     console.error("Error deleting task:", err);
   }
+}
+
+function initDatePicker() {
+  flatpickr("#deadline", {
+    dateFormat: "Y-m-d",
+    minDate: "today", // 🚫 block past dates
+    allowInput: false,
+    disableMobile: true,
+  });
 }

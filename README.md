@@ -1,23 +1,23 @@
 # 📝 Reminder App
 
-![Status](https://img.shields.io/badge/status-in%20development-yellow)
+![Status](https://img.shields.io/badge/status-active-success)
 ![Backend](https://img.shields.io/badge/backend-Node.js-green)
 ![Frontend](https://img.shields.io/badge/frontend-HTML%2FCSS%2FJS-blue)
-![Database](https://img.shields.io/badge/database-in%20memory-lightgrey)
+![Database](https://img.shields.io/badge/database-PostgreSQL-blue)
 ![License](https://img.shields.io/badge/license-MIT-brightgreen)
 
-A task management system built on the **Eisenhower (Urgent–Important) Matrix**, designed to help users prioritize tasks effectively and manage deadlines efficiently.
+A task management system based on the **Eisenhower (Urgent–Important) Matrix**, helping users prioritize tasks and track deadlines efficiently.
 
 ---
 
 ## 📌 Overview
 
-The Reminder App helps users:
+The Reminder App allows users to:
 
-- Organize tasks using priority-based classification
-- Track deadlines with real-time status indicators
-- Visualize productivity using a 4-quadrant matrix
-- Manage task lifecycle (create → update → complete → delete)
+- Organize tasks using priority classification
+- Track deadlines with real-time indicators
+- Manage tasks (create, update, complete, delete)
+- Visualize tasks in a 4-quadrant productivity matrix
 
 ---
 
@@ -25,10 +25,10 @@ The Reminder App helps users:
 
 ### ✅ Task Management
 
-- Create tasks
-- Update tasks
-- Delete tasks
-- View all tasks
+- ➕ Create tasks
+- ✏️ Update tasks
+- ✔ Mark tasks as completed
+- ❌ Delete tasks
 
 ---
 
@@ -45,13 +45,13 @@ The Reminder App helps users:
 
 ### ⏳ Deadline Tracking
 
-- Optional deadlines per task
-- Automatic calculation:
-  - Days remaining
-  - Due today
-  - Overdue detection
+- Optional deadlines
+- Smart indicators:
+  - ⏳ Due today
+  - 📅 Days remaining
+  - ⚠️ Overdue
 
-**Status Colors:**
+**Visual Indicators:**
 
 - 🔴 Overdue
 - 🟠 Due today
@@ -61,9 +61,9 @@ The Reminder App helps users:
 
 ### ✔ Completed Tasks
 
-- Mark tasks as completed
 - Separate completed section
-- Stores completion timestamp
+- Automatic timestamp on completion
+- Tasks move dynamically after completion
 
 ---
 
@@ -74,7 +74,8 @@ The Reminder App helps users:
 | Frontend | HTML, CSS, JavaScript  |
 | Styling  | Bootstrap + Custom CSS |
 | Backend  | Node.js, Express.js    |
-| Database | In-memory (temporary)  |
+| Database | PostgreSQL             |
+| DevOps   | Docker, Docker Compose |
 
 ---
 
@@ -91,108 +92,41 @@ The Reminder App helps users:
 
 ## 🔄 Workflow
 
-- ➕ Create task → added to matrix
-- ✏️ Update task → modifies details
-- ✔ Complete task → moves to completed section
-- ❌ Delete task → removed permanently
+- ➕ Create → Task appears in matrix
+- ✏️ Update → Task details modified
+- ✔ Complete → Moves to completed section
+- ❌ Delete → Removed permanently
 
 ---
 
-## 🖼️ Screenshots
+## 🐳 Docker Setup
 
-> Add screenshots in `/screenshots` folder
+The application runs using **Docker Compose** with 3 services:
 
-### 🏠 Dashboard (Matrix View)
+- **Frontend** → Nginx (serves static files)
+- **Backend** → Node.js API
+- **Database** → PostgreSQL
 
-![Dashboard](screenshots/dashboard.png)
+### ▶ Run the app
 
-### ➕ Create Task Modal
-
-![Create Task](screenshots/create-task.png)
-
-### 📅 Deadline Tracking View
-
-![Deadline View](screenshots/deadline.png)
-
-### ✔ Completed Tasks Section
-
-![Completed Tasks](screenshots/completed.png)
-
----
-
-## 🚧 Current Limitations
-
-- ❌ No database persistence
-- ❌ No authentication
-- ❌ No multi-user support
-- ❌ Data resets on server restart
-
----
-
-## 🚀 Roadmap
-
-### 🔥 Phase 1
-
-- PostgreSQL integration
-- Persistent storage
-- Schema design
-
-### ⚡ Phase 2
-
-- Task sorting & filtering
-- Activity logs
-- Deadline editing
-
-### 🧠 Phase 3
-
-- User authentication
-- Multi-user system
-- Role-based access
-
----
-
-## 🐳 Docker Plan
-
-Planned architecture:
-
-- Frontend (Nginx / Static)
-- Backend (Node.js API)
-- Database (PostgreSQL)
-
-### Concepts
-
-- Docker Compose
-- Container networking
-- Volumes for persistence
-
----
-
-## 📂 Project Structure
-
+```bash
+docker-compose up --build
 ```
+
+---
+
+🌐 Access
+
+- **Frontend** http://localhost:3000
+- **Backtend** http://localhost:5000
+
+---
+
+📂 Project Structure
 reminder-app/
 │
-├── backend/ # Express backend
-├── frontend/ # UI layer
-├── database/ # DB schema (future)
+├── backend/ # Express API
+├── frontend/ # Static UI (HTML/CSS/JS)
 ├── screenshots/ # UI images
 ├── docker-compose.yml
 └── README.md
-```
-
----
-
-## 💡 Vision
-
-This project aims to evolve into a **scalable productivity system** with:
-
-- Persistent data storage
-- Clean modular architecture
-- Multi-user collaboration
-- Containerized deployment
-
----
-
-## ⭐ If you like this project
-
-Give it a ⭐ on GitHub and feel free to contribute!

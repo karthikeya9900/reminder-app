@@ -1,7 +1,10 @@
 FROM nginx:alpine
 
-COPY . /usr/share/nginx/html
+# Remove default nginx files
+RUN rm -rf /usr/share/nginx/html/*
 
+# Copy ONLY public folder
+COPY public/ /usr/share/nginx/html
+
+# Optional: custom nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80

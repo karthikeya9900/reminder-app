@@ -20,6 +20,14 @@ function addEmptyState(box) {
 async function fetchTasks() {
   try {
     const res = await fetch(API_URL);
+
+    // ✅ Handle backend errors properly
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Backend error:", text);
+      return;
+    }
+
     const data = await res.json();
 
     const uiBox = document.getElementById("urgent-important");
@@ -28,7 +36,6 @@ async function fetchTasks() {
     const noneBox = document.getElementById("not-urgent-not-important");
     const completedList = document.getElementById("completed-task-list");
 
-    // Clear all boxes
     uiBox.innerHTML = "";
     iuBox.innerHTML = "";
     uiNotBox.innerHTML = "";
@@ -38,21 +45,26 @@ async function fetchTasks() {
     data.forEach((task) => {
       const taskElement = createTaskElement(task);
 
+      // ✅ FIX: handle NULL values safely
+      const urgent = task.urgent === true;
+      const important = task.important === true;
+
       if (task.completed) {
         completedList.appendChild(taskElement);
         return;
       }
 
-      if (task.urgent && task.important) {
+      if (urgent && important) {
         uiBox.appendChild(taskElement);
-      } else if (!task.urgent && task.important) {
+      } else if (!urgent && important) {
         iuBox.appendChild(taskElement);
-      } else if (task.urgent && !task.important) {
+      } else if (urgent && !important) {
         uiNotBox.appendChild(taskElement);
       } else {
         noneBox.appendChild(taskElement);
       }
     });
+
     addEmptyState(uiBox);
     addEmptyState(iuBox);
     addEmptyState(uiNotBox);
@@ -255,11 +267,34 @@ function enableEditMode(task, li, leftDiv, rightDiv) {
 // 🔹 Add Task
 async function addTask() {
   const input = document.getElementById("taskInput");
-  const urgent = document.getElementById("urgent").checked;
-  const important = document.getElementById("important").checked;
-  const deadline = document.getElementById("deadline").value;
+  const urgentCheckbox = document.getElementById("urgent");
+  const importantCheckbox = document.getElementById("important");
+  const deadlineInput = document.getElementById("deadline");
+  // Set min date to today
+  document.getElementById("deadline").min = new Date()
+    .toISOString()
+    .split("T")[0];
 
   const title = input.value.trim();
+  const urgent = urgentCheckbox.checked;
+  const important = importantCheckbox.checked;
+  const deadline = deadlineInput.value;
+
+  // ✅ Validate deadline
+  if (deadline) {
+    const today = new Date();
+    const selected = new Date(deadline);
+
+    // Remove time for accurate comparison
+    today.setHours(0, 0, 0, 0);
+    selected.setHours(0, 0, 0, 0);
+
+    if (selected < today) {
+      alert("❌ Deadline cannot be in the past");
+      return;
+    }
+  }
+
   if (!title) return;
 
   if (!urgent && !important) {
@@ -269,23 +304,38 @@ async function addTask() {
     if (!confirmNoPriority) return;
   }
 
+  // ✅ FIX: don't send empty deadline
+  const payload = {
+    title,
+    urgent,
+    important,
+  };
+
+  if (deadline) {
+    payload.deadline = deadline;
+  }
+
   try {
-    await fetch(API_URL, {
+    const res = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        title,
-        urgent,
-        important,
-        deadline,
-      }),
+      body: JSON.stringify(payload),
     });
 
+    // ✅ Handle backend errors
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Insert error:", text);
+      return;
+    }
+
+    // ✅ Clear inputs
     input.value = "";
-    document.getElementById("urgent").checked = false;
-    document.getElementById("important").checked = false;
+    deadlineInput.value = "";
+    urgentCheckbox.checked = false;
+    importantCheckbox.checked = false;
 
     fetchTasks();
   } catch (err) {
